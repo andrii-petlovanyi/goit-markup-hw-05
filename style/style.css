@@ -58,6 +58,8 @@ img {
   --second-block-color: #2f303a;
   --accent-block-color: #f5f4fa;
   --icon-color: #afb1b8;
+
+  --timing-buzier: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* --- Style --- */
@@ -98,7 +100,6 @@ body {
 .header-container {
   display: flex;
   align-items: center;
-  padding: 24px 15px;
 }
 
 .logo {
@@ -120,15 +121,20 @@ body {
 }
 
 .site-nav .link {
+  position: relative;
   display: block;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 32px;
+  padding-bottom: 32px;
   color: var(--primary-text-color);
   font-weight: 500;
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
   text-decoration: none;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .site-nav .link:hover,
@@ -136,8 +142,15 @@ body {
   color: var(--accent-text-color);
 }
 
-.site-nav .active {
-  color: var(--accent-text-color);
+.site-nav .active::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: 0;
+  right: 0;
+  background-color: var(--accent-text-color);
+  border-radius: 2px;
 }
 
 .contact-header {
@@ -157,6 +170,10 @@ body {
   letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .contact-header .email-icon,
@@ -300,10 +317,28 @@ body {
 
 .work-list .item {
   display: flex;
+  position: relative;
 }
 
 .work-list .item:not(:last-child) {
   margin-right: 30px;
+}
+
+.work-list .label {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(47, 48, 58, 0.8);
+  color: var(--second-text-color);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 /*-----OUR TEAM----*/
@@ -353,6 +388,10 @@ body {
   display: flex;
   border-radius: 50%;
   padding: 12px;
+
+  transition-property: background-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .main-team .icon {
@@ -372,7 +411,7 @@ body {
   color: var(--primary-text-color);
 }
 
-.main-team .label {
+.main-team .label-position {
   font-size: 16px;
   line-height: 1.19;
   color: var(--other-text-color);
@@ -410,6 +449,10 @@ body {
   height: 92px;
   border: 1px solid #afb1b8;
   border-radius: 4px;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .customer-icons .icon {
@@ -461,6 +504,10 @@ body {
   height: 44px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .footer-links .social-link:hover,
@@ -487,6 +534,10 @@ body {
   font-size: 14px;
   line-height: 1.71;
   font-style: normal;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .footer .link {
@@ -495,6 +546,10 @@ body {
   line-height: 1.71;
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .footer-list .link:not(:last-child) {
@@ -546,6 +601,10 @@ body {
   line-height: 1.62;
   text-align: center;
   letter-spacing: 0.03em;
+
+  transition-property: color, background-color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: var(--timing-buzier);
 }
 
 .main-portfolio .btn:hover,
@@ -567,6 +626,61 @@ body {
 
 .portfolio-list .card {
   display: inline-block;
+  transition: box-shadow 250ms var(--timing-buzier);
+}
+
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+.thumb::before {
+  content: "";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 294px;
+  top: 0;
+  left: 0;
+
+  background: rgba(33, 150, 243, 0.9);
+  opacity: 0;
+
+  transform: translateY(100%);
+  transition: transform 250ms var(--timing-buzier),
+    opacity 250ms var(--timing-buzier);
+}
+
+.card .label {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 24px;
+  width: 100%;
+  height: 294px;
+  top: 0;
+  left: 0;
+  color: var(--second-text-color);
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+
+  opacity: 0;
+  transform: translateY(100%);
+  transition: transform 250ms var(--timing-buzier),
+    opacity 250ms var(--timing-buzier);
+}
+
+.card:hover .thumb::before,
+.card:hover .label,
+.card:focus .thumb::before,
+.card:focus .card .label {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .portfolio-list .card:hover,
@@ -601,6 +715,64 @@ body {
   color: var(--other-text-color);
 }
 
-.portfolio-list a {
-  text-decoration: none;
+/* ---- BackDrop/ Modal --- */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  transition: opacity 250ms var(--timing-buzier),
+    visibility 250ms var(--timing-buzier);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  width: 528px;
+  height: 581px;
+  background-color: var(--second-text-color);
+  transform: translate(-50%, -50%) scale(1);
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  transition: transform 250ms var(--timing-buzier);
+}
+
+.modal .close-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--second-text-color);
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+
+.modal .close-btn:hover,
+.modal .close-btn:focus {
+  cursor: pointer;
 }

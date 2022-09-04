@@ -68,7 +68,9 @@
       <section class="main-hero">
         <div class="container hero-container">
           <h1 class="hero-title">Ефективні рішення для вашого бізнесу</h1>
-          <button class="button" type="button">Замовити послугу</button>
+          <button class="button" type="button" data-modal-open>
+            Замовити послугу
+          </button>
         </div>
       </section>
 
@@ -132,21 +134,28 @@
           <h2 class="title-work">Чим ми займаємось</h2>
           <ul class="work-list">
             <li class="item">
-              <img src="./images/box_1.jpg" alt="написання коду" width="370" />
+              <img
+                src="./images/box_1.jpg"
+                alt="десктопні додатки"
+                width="370"
+              />
+              <p class="label">десктопні додатки</p>
             </li>
             <li class="item">
               <img
                 src="./images/box_2.jpg"
-                alt="розробка макетів мобільних застосунків"
+                alt="мобільні додатки"
                 width="370"
               />
+              <p class="label">мобільні додатки</p>
             </li>
             <li class="item">
               <img
                 src="./images/box_3.jpg"
-                alt="розробка дизайну та оформлення"
+                alt="дизайнерські рішення"
                 width="370"
               />
+              <p class="label">дизайнерські рішення</p>
             </li>
           </ul>
         </div>
@@ -164,7 +173,7 @@
               />
               <div class="card-box">
                 <h3 class="title-card">Ігор Дем'яненко</h3>
-                <p class="label" lang="en">Product Designer</p>
+                <p class="label-position" lang="en">Product Designer</p>
                 <ul class="social-links">
                   <li class="social-icon">
                     <a class="link" href="#" aria-label="Instagram"
@@ -211,7 +220,7 @@
               />
               <div class="card-box">
                 <h3 class="title-card">Ольга Репіна</h3>
-                <p class="label" lang="en">Frontend Developer</p>
+                <p class="label-position" lang="en">Frontend Developer</p>
                 <ul class="social-links">
                   <li class="social-icon">
                     <a class="link" href="#" aria-label="Instagram"
@@ -258,7 +267,7 @@
               />
               <div class="card-box">
                 <h3 class="title-card">Микола Тарасов</h3>
-                <p class="label" lang="en">Marketing</p>
+                <p class="label-position" lang="en">Marketing</p>
                 <ul class="social-links">
                   <li class="social-icon">
                     <a class="link" href="#" aria-label="Instagram"
@@ -305,7 +314,7 @@
               />
               <div class="card-box">
                 <h3 class="title-card">Михайло Єрмаков</h3>
-                <p class="label" lang="en">UI Designer</p>
+                <p class="label-position" lang="en">UI Designer</p>
                 <ul class="social-links">
                   <li class="social-icon">
                     <a class="link" href="#" aria-label="Instagram"
@@ -468,5 +477,32 @@
         </div>
       </div>
     </footer>
+
+    <!-- --- Modal --- -->
+    <div class="backdrop is-hidden" data-modal>
+      <div class="modal">
+        <button class="close-btn" data-modal-close>
+          <svg class="icon" width="11" height="11">
+            <use href="./images/symbol-defs.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- --- Script Modal --- -->
+    <script>
+      const refs = {
+        openModalBtn: document.querySelector("[data-modal-open]"),
+        closeModalBtn: document.querySelector("[data-modal-close]"),
+        modal: document.querySelector("[data-modal]"),
+      };
+
+      refs.openModalBtn.addEventListener("click", toggleModal);
+      refs.closeModalBtn.addEventListener("click", toggleModal);
+
+      function toggleModal() {
+        refs.modal.classList.toggle("is-hidden");
+      }
+    </script>
   </body>
 </html>
